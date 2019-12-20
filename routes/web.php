@@ -21,7 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/specialties', 'SpecialtyController@index');
-Route::get('/specialties/create', 'SpecialtyController@create');
-Route::get('/specialties/{specialty}/edit', 'SpecialtyController@edit');
-Route::post('/specialties', 'SpecialtyController@store');
+Route::get('/specialties/create', 'SpecialtyController@create'); //form register
+Route::post('/specialties', 'SpecialtyController@store'); //envio del register
+Route::get('/specialties/{specialty}/edit', 'SpecialtyController@edit'); //form edit
+Route::put('/specialties/{specialty}', 'SpecialtyController@update'); // envio edit
+Route::delete('/specialties/{specialty}', 'SpecialtyController@destroy'); // borrar registro
+
 
