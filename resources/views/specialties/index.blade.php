@@ -12,6 +12,14 @@
                 </div>
               </div>
             </div>
+            <div class="card-body">
+            @if (session('notification'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('notification') }}
+                </div>
+            @endif
+            </div>
+            
             <div class="table-responsive">
               <!-- Projects table -->
               <table class="table align-items-center table-flush">
@@ -32,8 +40,14 @@
                       {{ $specialty->description }}
                     </td>
                     <td>
-                      <a href="{{ url('specialties/'.$specialty->id.'/edit') }}" class="btn btn-sm btn-primary">Editar</a>
-                      <a href="" class="btn btn-sm btn-danger">Eliminar</a>
+                      
+                      <form action="{{ url('/specialties/'.$specialty->id) }}" method="POST">
+                      @csrf 
+                      @method('DELETE')
+                      <a href="{{ url('/specialties/'.$specialty->id.'/edit') }}" class="btn btn-sm btn-primary">Editar</a>
+                      <button href="" class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+                      </form>
+                      
                     </td>
                     
                   </tr>
