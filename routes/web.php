@@ -27,4 +27,8 @@ Route::get('/specialties/{specialty}/edit', 'SpecialtyController@edit'); //form 
 Route::put('/specialties/{specialty}', 'SpecialtyController@update'); // envio edit
 Route::delete('/specialties/{specialty}', 'SpecialtyController@destroy'); // borrar registro
 
+//Doctors
+Route::resource('doctors','DoctorController');
+
+//Patients
 
