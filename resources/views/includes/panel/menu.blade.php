@@ -11,12 +11,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./examples/maps.html">
+            <a class="nav-link" href="{{ url('/doctors')}}">
               <i class="ni ni-pin-3 text-orange"></i> Médicos
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./examples/profile.html">
+            <a class="nav-link" href="{{ url('/patients')}}">
               <i class="ni ni-single-02 text-yellow"></i> Pacientes
             </a>
           </li>

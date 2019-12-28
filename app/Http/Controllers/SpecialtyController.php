@@ -75,7 +75,7 @@ class SpecialtyController extends Controller
 
         $specialty->delete();
         
-        $notification = 'La especialidad <b>'.$deletedSpecialty .'</b> se ha eliminado correctamente';
+        $notification = 'La especialidad <b>'.$deletedSpecialty.'</b> se ha eliminado correctamente';
         return redirect('/specialties')->with(compact('notification'));
     }
 }
