@@ -32,3 +32,4 @@ Route::resource('doctors','DoctorController');
 
 //Patients
 
+Route::resource('patients','PatientController');
