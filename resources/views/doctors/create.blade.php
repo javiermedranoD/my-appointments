@@ -39,13 +39,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="identificacion">Dirección</label>
-                        <input type="text" name="identificacion" class="form-control" value="{{ old('address') }}" >
+                        <label for="address">Dirección</label>
+                        <input type="text" name="address" class="form-control" value="{{ old('address') }}" >
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Teléfono</label>
                         <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="text" name="password" class="form-control" value="{{ str_random(6) }}" >
                     </div>
 
                     <div class="form-group">
