@@ -1,6 +1,12 @@
 @extends('layouts.panel')
 
 @section('content')
+<?php 
+    if(isset($_GET['page']))
+        $page = $_GET['page']; 
+    else
+        $page=1;
+?>
 <div class="card shadow">
             <div class="card-header border-0">
               <div class="row align-items-center">
@@ -48,7 +54,8 @@
                       <form action="{{ url('/patients/'.$patient->id) }}" method="POST">
                       @csrf 
                       @method('DELETE')
-                      <a href="{{ url('/patients/'.$patient->id.'/edit') }}" class="btn btn-sm btn-primary">Editar</a>
+                      <a href="{{ url('/patients/'.$patient->id.'/edit?page='.$page) }}" class="btn btn-sm btn-primary">Editar</a>
+                      <input name="page" type="hidden" value="{{ $page }}">
                       <button href="" class="btn btn-sm btn-danger" type="submit">Eliminar</button>
                       </form>
                       
@@ -59,6 +66,13 @@
                 </tbody>
               </table>
             </div>
+            {{ $patients->get('page')}}
+            <div class="card-body mx-auto">
+                <p class="">
+                    {{ $patients->links() }}
+                </p>
+            </div>
+            
           </div>
 
 
