@@ -1,5 +1,13 @@
 <!-- Navigation -->
+        <h6 class="navbar-heading text-muted">
+        @if (auth()->user()->role == 'admin')
+            Gestionar datos
+        @else 
+            Menú
+        @endif
+        </h6>
         <ul class="navbar-nav">
+        @if (auth()->user()->role == 'admin')
           <li class="nav-item">
             <a class="nav-link" href="./index.html">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
@@ -22,9 +30,37 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./examples/tables.html">
-              <i class="ni ni-bullet-list-67 text-red"></i> Tables
+              <i class="ni ni-bullet-list-67 text-red"></i> Citas
             </a>
           </li>
+        @elseif (auth()->user()->role == 'doctor')
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">
+              <i class="ni ni-book-bookmark text-primary"></i> Gestionar horarios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">
+              <i class="ni ni-calendar-grid-58 text-primary"></i> Mis citas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">
+              <i class="ni ni-satisfied text-primary"></i> Mis pacientes
+            </a>
+          </li>
+        @else (auth()->user()->role == 'patient')
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/specialties')}}">
+              <i class="ni ni-briefcase-24 text-red"></i> Reservar cita
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/specialties')}}">
+              <i class="ni ni-bell-55 text-blue"></i> Mis citas
+            </a>
+          </li>
+        @endif
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('formLogout').submit();">
               <i class="ni ni-key-25 text-info"></i> Cerrar sesion
@@ -33,16 +69,13 @@
                 @csrf
             </form>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
-            </a>
-          </li>
+          
         </ul>
+        @if (auth()->user()->role == 'admin')
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
-        <h6 class="navbar-heading text-muted">Reportes</h6>
+        <h6 class="navbar-heading text-muted">Gestionar reportes</h6>
         <!-- Navigation -->
         <ul class="navbar-nav mb-md-3">
           <li class="nav-item">
@@ -55,5 +88,5 @@
               <i class="ni ni-palette"></i> Médicos más activos
             </a>
           </li>
-        
+        @endif
         </ul>
