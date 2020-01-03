@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-Use App\User;
+use App\User;
 
-class PatientController extends Controller
+use App\Http\Controllers\Controller; 
+
+class DoctorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = User::patients()->paginate(5);
-        return view('patients.index', compact ('patients'));
+        $doctors = User::doctors()->get();
+        return view('doctors.index', compact ('doctors'));
     }
 
     /**
@@ -25,7 +27,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return view('patients.create');
+        return view('doctors.create');
     }
 
     /**
@@ -36,7 +38,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-         $rules = [
+        $rules = [
             'name' => 'required|min:3',
             'email' => 'required|email',
             'identificacion' => 'digits:8',
@@ -48,12 +50,13 @@ class PatientController extends Controller
 
         User::create(
             $request->only('name', 'email', 'identificacion', 'address', 'phone') + [
-                'role' => 'patient',
+                'role' => 'doctor',
                 'password' => bcrypt($request->input('password'))
             ]
         );
-        $notification = 'El paciente se ha registrado correctamente';
-        return redirect('/patients')->with(compact('notification'));
+        $notification = 'El médico se ha registrado correctamente';
+        return redirect('/doctors')->with(compact('notification'));
+
     }
 
     /**
@@ -63,8 +66,8 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+       
     }
 
     /**
@@ -73,9 +76,10 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $patient)
+    public function edit($id)
     {
-        return view('patients.edit', compact('patient'));
+        $doctor = User::doctors()->findOrfail($id);
+        return view('doctors.edit', compact('doctor'));
     }
 
     /**
@@ -87,7 +91,7 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $rules = [
+        $rules = [
             'name' => 'required|min:3',
             'email' => 'required|email',
             'identificacion' => 'digits:8',
@@ -97,7 +101,7 @@ class PatientController extends Controller
 
         $this->validate($request, $rules);
 
-        $user = User::patients()->findOrfail($id);
+        $user = User::doctors()->findOrfail($id);
         $data =  $request->only('name', 'email', 'identificacion', 'address', 'phone');
         $password = $request->input('password');
 
@@ -107,8 +111,8 @@ class PatientController extends Controller
         $user->fill($data);
         $user->save();
         
-        $notification = 'La información del paciente se ha registrado correctamente';
-        return redirect('/patients?page='.$request->input('page'))->with(compact('notification'));
+        $notification = 'La información del médico se ha registrado correctamente';
+        return redirect('/doctors')->with(compact('notification'));
 
     }
 
@@ -118,12 +122,13 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $patient, Request $request)
+    public function destroy(User $doctor)
     {
-        $patientName = $patient->name;
-        $patient->delete();
+        $doctorName = $doctor->name;
+        $doctor->delete();
 
-        $notification = "El paciente $patientName se ha eliminado correctamente";
-        return redirect('/patients?page='.$request->input('page'))->with(compact('notification'));
+        $notification = "El médico $doctorName se ha eliminado correctamente";
+        return redirect('/doctors')->with(compact('notification'));
+
     }
 }
