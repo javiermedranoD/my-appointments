@@ -35,7 +35,7 @@
           </li>
         @elseif (auth()->user()->role == 'doctor')
           <li class="nav-item">
-            <a class="nav-link" href="./index.html">
+            <a class="nav-link" href="/schedule">
               <i class="ni ni-book-bookmark text-primary"></i> Gestionar horarios
             </a>
           </li>
