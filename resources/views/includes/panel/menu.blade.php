@@ -51,7 +51,7 @@
           </li>
         @else (auth()->user()->role == 'patient')
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/specialties')}}">
+            <a class="nav-link" href="{{ url('/appointments/create')}}">
               <i class="ni ni-briefcase-24 text-red"></i> Reservar cita
             </a>
           </li>

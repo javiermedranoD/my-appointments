@@ -39,3 +39,6 @@ Route::middleware(['auth', 'doctor'])->namespace('Doctor')->group(function () {
     Route::get('/schedule', 'ScheduleController@edit');
     Route::post('/schedule', 'ScheduleController@store');
     });
+
+    Route::get('/appointments/create', 'AppointmentController@create'); //Crear cita
+    Route::post('/appointments', 'AppointmentController@store'); //guardar la cita
